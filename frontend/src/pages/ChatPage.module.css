@@ -1,0 +1,601 @@
+/* ═══════════════════════════════════════════════
+   CSS Variables — Glassmorphism Theme
+   (matches CSS_Variables_for_theming.md)
+═══════════════════════════════════════════════ */
+:root {
+  --glass-bg:          rgba(255, 255, 255, 0.08);
+  --glass-bg-hover:    rgba(255, 255, 255, 0.13);
+  --glass-bg-strong:   rgba(255, 255, 255, 0.15);
+  --glass-bg-dark:     rgba(0, 0, 0, 0.18);
+  --glass-border:      rgba(255, 255, 255, 0.18);
+  --glass-border-hover:rgba(255, 255, 255, 0.30);
+  --glass-shadow:      0 25px 50px -12px rgba(0, 0, 0, 0.45);
+  --glass-inset:       inset 0 1px 1px rgba(255, 255, 255, 0.12);
+  --glass-blur:        blur(20px);
+  --glass-blur-sm:     blur(10px);
+
+  /* Text */
+  --text-primary:      #ffffff;
+  --text-secondary:    rgba(255, 255, 255, 0.70);
+  --text-muted:        rgba(255, 255, 255, 0.40);
+
+  /* Accent */
+  --accent:            #7163f1;
+  --accent-hover:      #818cf8;
+  --accent-glow:       rgba(113, 99, 241, 0.25);
+
+  /* Semantic */
+  --error-bg:          rgba(239, 68, 68, 0.18);
+  --error-border:      #f87171;
+  --error-text:        #fca5a5;
+  --success-bg:        rgba(34, 197, 94, 0.18);
+  --success-border:    #22c55e;
+  --success-text:      #86efac;
+}
+
+/* ═══════════════════════════════════════════════
+   Animated Gradient Background
+═══════════════════════════════════════════════ */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px);
+  background: linear-gradient(-45deg, #0f0c29, #2b6345, #24243e, #0f0c29);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+/* Floating orbs */
+.container::before,
+.container::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.45;
+  animation: float 8s ease-in-out infinite;
+  pointer-events: none;
+}
+.container::before {
+  width: 420px; height: 420px;
+  background: #6366f1;
+  top: -120px; left: -120px;
+}
+.container::after {
+  width: 320px; height: 320px;
+  background: #ec4899;
+  bottom: -60px; right: -60px;
+  animation-delay: -4s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(30px, 30px) scale(1.1); }
+}
+
+/* ═══════════════════════════════════════════════
+   Chat Area
+═══════════════════════════════════════════════ */
+.chatArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 16px;
+  scroll-behavior: smooth;
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+}
+
+/* ═══════════════════════════════════════════════
+   Welcome Screen
+═══════════════════════════════════════════════ */
+.welcomeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+  padding: 2rem;
+  animation: fadeIn 0.5s ease-in;
+  position: relative;
+  z-index: 1;
+}
+
+.welcomeIcon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: bounce 2s infinite;
+}
+
+.welcomeTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.02em;
+}
+
+.welcomeSubtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0 0 2rem 0;
+}
+
+.suggestions {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  padding: 1.5rem;
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glass-inset);
+  max-width: 420px;
+  width: 100%;
+}
+
+.suggestionLabel {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem 0;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.suggestionList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.suggestionList li {
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-inset);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.suggestionList li:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  color: var(--text-primary);
+  transform: translateX(4px);
+}
+
+.suggestionList li:active {
+  background: var(--glass-bg-strong);
+  transform: translateX(2px);
+}
+
+/* ═══════════════════════════════════════════════
+   Message Groups
+═══════════════════════════════════════════════ */
+.messageGroup {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.messageGroup.user {
+  flex-direction: row-reverse;
+}
+
+/* Avatar */
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--glass-bg-strong);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  box-shadow: var(--glass-inset), 0 2px 8px rgba(113, 99, 241, 0.25);
+}
+
+/* Messages wrapper */
+.messagesWrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 75%;
+}
+
+.user .messagesWrapper {
+  align-items: flex-end;
+}
+/* ══════════════════════════════════════════
+   Provider + Model Selectors
+══════════════════════════════════════════ */
+.selector-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.glass-select {
+  min-width: 170px;
+  padding: 10px 14px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: var(--text-primary);
+  font-family: var(--font);
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+  transition:
+    border-color var(--transition),
+    background var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
+  box-shadow: var(--glass-inset);
+}
+
+.glass-select:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: var(--glass-border-hover);
+}
+
+.glass-select:focus {
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 3px var(--accent-glow),
+    var(--glass-inset);
+}
+
+.glass-select option {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-primary);
+  padding: 10px 14px;
+  font-size: 13px;
+  border: none;
+  border-bottom: 1px solid var(--glass-border);
+  transition: background var(--transition);
+}
+
+/* ══════════════════════════════════════════
+   Mic Button
+══════════════════════════════════════════ */
+.mic-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    transform var(--transition),
+    background var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+  flex-shrink: 0;
+  box-shadow: var(--glass-inset);
+}
+
+.mic-btn:hover {
+  transform: scale(1.08);
+  background: rgba(255,255,255,0.14);
+  border-color: var(--accent);
+  box-shadow:
+    0 0 18px rgba(241, 99, 99, 0.35),
+    var(--glass-inset);
+}
+
+.mic-btn.active {
+  background: rgba(239,68,68,0.20);
+  border-color: #ef4444;
+  box-shadow:
+    0 0 20px rgba(239,68,68,0.4),
+    var(--glass-inset);
+}
+
+/* ═══════════════════════════════════════════════
+   Message Bubbles
+═══════════════════════════════════════════════ */
+.messageBubble {
+  max-width: 100%;
+  word-wrap: break-word;
+  animation: slideUp 0.25s ease-out;
+}
+
+.bubbleContent {
+  padding: 10px 14px;
+  border-radius: 18px;
+  line-height: 1.55;
+  position: relative;
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+}
+
+/* Assistant bubble */
+.assistant .bubbleContent {
+  background: var(--glass-bg);
+  color: var(--text-primary);
+  border-bottom-left-radius: 4px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-inset), 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* User bubble */
+.user .bubbleContent {
+  background: linear-gradient(135deg, rgba(113, 99, 241, 0.45), rgba(139, 92, 246, 0.35));
+  color: white;
+  border-bottom-right-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: var(--glass-inset), 0 4px 16px rgba(113, 99, 241, 0.3);
+}
+
+/* ═══════════════════════════════════════════════
+   Bubble Meta (timestamp / read status)
+═══════════════════════════════════════════════ */
+.bubbleMeta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  padding: 0 4px;
+}
+
+.timestamp {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.readStatus {
+  font-size: 0.7rem;
+  color: var(--accent-hover);
+  margin-left: 2px;
+}
+
+/* ═══════════════════════════════════════════════
+   Typing Indicator
+═══════════════════════════════════════════════ */
+.typingIndicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+  padding-left: 44px;
+}
+
+.typingBubble {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  padding: 12px 16px;
+  border-radius: 18px;
+  border-bottom-left-radius: 4px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-inset);
+}
+
+.typingDot {
+  width: 8px;
+  height: 8px;
+  background: var(--text-muted);
+  border-radius: 50%;
+  animation: typingBounce 1.4s infinite ease-in-out both;
+}
+.typingDot:nth-child(1) { animation-delay: -0.32s; }
+.typingDot:nth-child(2) { animation-delay: -0.16s; }
+
+.typingText {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-left: 8px;
+}
+
+.streamingIndicator {
+  padding-left: 44px;
+  margin: 8px 0;
+}
+
+/* Audio player wrapper */
+.audioPlayerWrapper {
+  margin-top: 4px;
+  margin-left: 44px;
+  max-width: 450px;
+}
+
+/* ═══════════════════════════════════════════════
+   Composer (Input Bar)
+═══════════════════════════════════════════════ */
+.composer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-top: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glass-inset);
+  transition: box-shadow 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.composer.focused {
+  box-shadow: 0 -2px 20px rgba(113, 99, 241, 0.15), var(--glass-shadow), var(--glass-inset);
+}
+
+.inputWrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: var(--glass-bg-dark);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  border-radius: 9999px;
+  padding: 0 4px 0 20px;
+  border: 1px solid var(--glass-border);
+  transition: all 0.2s ease;
+}
+
+.composer.focused .inputWrapper {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+.messageInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 8px 0;
+  font-size: 0.95rem;
+  outline: none;
+  color: var(--text-primary);
+}
+
+.messageInput::placeholder {
+  color: var(--text-muted);
+}
+
+/* ═══════════════════════════════════════════════
+   Send Button
+═══════════════════════════════════════════════ */
+.sendButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #8b5cf6);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  box-shadow: 0 2px 12px rgba(113, 99, 241, 0.4), var(--glass-inset);
+}
+
+.sendButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--accent-hover), #a78bfa);
+  box-shadow: 0 4px 20px rgba(113, 99, 241, 0.5), var(--glass-inset);
+  transform: translateY(-2px);
+}
+
+.sendButton:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.sendButton:disabled {
+  background: var(--glass-bg-strong);
+  border-color: var(--glass-border);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ═══════════════════════════════════════════════
+   TTS Toggle Button
+═══════════════════════════════════════════════ */
+.ttsToggle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  color: var(--text-secondary);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-inset);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.ttsToggle:hover:not(:disabled) {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  color: var(--text-primary);
+}
+
+.ttsToggle.enabled {
+  background: rgba(34, 197, 94, 0.25);
+  color: #86efac;
+  border-color: rgba(34, 197, 94, 0.40);
+  box-shadow: 0 2px 12px rgba(34, 197, 94, 0.2), var(--glass-inset);
+}
+
+.ttsToggle:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ═══════════════════════════════════════════════
+   Animations
+═══════════════════════════════════════════════ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30%            { transform: translateY(-5px); }
+}
+
+/* ═══════════════════════════════════════════════
+   Scrollbar
+═══════════════════════════════════════════════ */
+.chatArea::-webkit-scrollbar            { width: 5px; }
+.chatArea::-webkit-scrollbar-track     { background: transparent; }
+.chatArea::-webkit-scrollbar-thumb     { background: rgba(255,255,255,0.15); border-radius: 3px; }
+.chatArea::-webkit-scrollbar-thumb:hover{ background: rgba(255,255,255,0.28); }

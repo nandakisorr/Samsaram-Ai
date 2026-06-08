@@ -1,0 +1,56 @@
+# Added by MR Multi Model Ai Coder — workspace-scoped chat sessions,
+# error logs, pasted images, and uploaded file attachments. Safe to keep.
+.mrcoder/
+
+# Scratch/utility scripts (prefix-based)
+_*.py
+temp_*.py
+tmp_*.py
+trace_*.py
+verify_*.py
+diagnose_*.py
+debug_*.py
+check_*.py
+fix_*.py
+inspect_*.py
+test_*.py
+find_*.py
+explore_*.py
+config_verify.py
+final_*.py
+download_*.py
+restore_full.py
+show_*.py
+replace_*.py
+quick_*.py
+
+# Scratch files (specific artifacts)
+_prefix_output.txt
+_npm_list.txt
+_dump_chat.py
+temporary_*
+temp_*
+
+# Binary/package artifacts
+mr-multi-coder-*.vsix
+*.vsix
+
+# Test artifacts
+*.wav
+test_*.wav
+*.tmp
+
+# Log directories
+logs/
+*.log
+
+# Environment
+.env
+.env.example
+.env.*
+
+# Database files
+*.db
+
+# Scratch TSX
+cat_page.tsx
